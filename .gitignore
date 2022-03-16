@@ -37,6 +37,9 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
+# Dependency Package lock
+package-lock.json
+
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -70,6 +73,8 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.dev
+.env.prod
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)

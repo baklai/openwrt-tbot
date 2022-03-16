@@ -1,0 +1,31 @@
+{
+  "name": "openwrt-tbot",
+  "version": "1.0.0",
+  "description": "This is a Telegram bot for the OpenWrt Project operating system targeting embedded devices.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development node index.js",
+    "start": "NODE_ENV=production node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baklai/openwrt-tbot.git"
+  },
+  "keywords": [
+    "telegram",
+    "openwrt",
+    "bot"
+  ],
+  "author": "Dmitrii Baklai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/baklai/openwrt-tbot/issues"
+  },
+  "homepage": "https://github.com/baklai/openwrt-tbot#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "moment": "^2.29.1",
+    "node-emoji": "^1.11.0",
+    "node-telegram-bot-api": "^0.56.0"
+  }
+}
