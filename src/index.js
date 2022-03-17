@@ -8,10 +8,10 @@
  *  Permanent fix :
  *  https://github.com/yagop/node-telegram-bot-api/issues/319
  */
-// process.env.NTBA_FIX_319 = 1;
+process.env.NTBA_FIX_319 = 1;
 
 // Application config
-const { TELEGRAM_ID, TELEGRAM_TOKEN } = process.env.NODE_ENV;
+const { TELEGRAM_ID, TELEGRAM_TOKEN } = process.env;
 
 // Telegram Modules
 const TelegramBot = require('node-telegram-bot-api');
@@ -47,7 +47,7 @@ TBOT.setMyCommands([...cmd.main.commands, ...cmd.method.commands], {})
   })
   .catch((err) => {
     console.log(err.code);
-    console.log(err.response.body);
+    console.log(err.response);
   });
 
 TBOT.onText(/\/start/, function (msg) {

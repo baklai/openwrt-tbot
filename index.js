@@ -7,25 +7,21 @@
 const path = require('path');
 const dotenv = require('dotenv');
 
-dotenv.config({
-  path:
-    process.env.NODE_ENV === 'production'
-      ? path.join(__dirname, '.env.prod')
-      : path.join(__dirname, '.env.dev')
-});
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 if (dotenv.error) {
   console.error(dotenv.error);
   process.exit(1);
 }
 
-const { dateToString } = require('./src/utils');
-const { htmlStatusBot403 } = require('./src/lib/html-message');
-
-const { TELEGRAM_ID } = process.env.NODE_ENV;
+const { TELEGRAM_ID } = process.env;
 
 // Telegram Bot
 const { TBOT } = require('./src');
+
+const { dateToString } = require('./src/utils');
+
+const { htmlStatusBot403 } = require('./src/lib/html-message');
 
 TBOT.onText(/\/status/, function (msg) {
   if (msg.from.id == TELEGRAM_ID) {

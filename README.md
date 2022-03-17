@@ -12,7 +12,7 @@ This is a Telegram bot for the OpenWrt Project operating system targeting embedd
 npm install
 ```
 
-## Project .env.dev || .env.prod
+## Project .env
 
 ```
 TELEGRAM_ID : ID администратора в telegram
