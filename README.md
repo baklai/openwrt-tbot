@@ -1,4 +1,4 @@
-# <img src="logo.png" width="32" height="32"> openwrt-tbot
+# <img src="logo.png" width="48" height="48"> openwrt-tbot
 
 This is a Telegram bot for the [OpenWrt Project](https://openwrt.org/) operating system targeting embedded devices.
 
