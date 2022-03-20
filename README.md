@@ -2,7 +2,7 @@
 
 This is a Telegram bot for the OpenWrt Project operating system targeting embedded devices.
 
-![OpenWrt Telegram Bot Logo](logo.png){ width=50% } This is a Telegram bot for the OpenWrt Project operating system targeting embedded devices. [OpenWrt Project](https://openwrt.org/).
+![OpenWrt Telegram Bot Logo](logo.png){: width=50% } This is a Telegram bot for the OpenWrt Project operating system targeting embedded devices. [OpenWrt Project](https://openwrt.org/).
 
 ## Project setup
 
