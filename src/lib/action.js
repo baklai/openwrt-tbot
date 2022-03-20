@@ -43,36 +43,4 @@ const Help = (bot, msg) => {
   });
 };
 
-// const About = (bot, msg) => {
-//   const { id } = msg.chat;
-//   var html = `Привет, <b>${msg.from.first_name}</b>!\n
-//   <b>Немного обо мне:</b>
-//   &#8226; ... <b>...</b>.
-//   `;
-//   bot
-//     .sendMessage(id, html, {
-//       parse_mode: 'HTML'
-//     })
-//     .catch((err) => {
-//       console.log(err.code);
-//       console.log(err.response.body);
-//     });
-// };
-
-const Donate = (bot, msg) => {
-  const { id } = msg.chat;
-  var html = `Привет, <b>${msg.from.first_name}</b>!\nПомощь на развитие проекта никогда не помешает:\n
-  ${emoji.gift} <b>...</b>: ...
-  ${emoji.gift} <b>...</b>: ...
-  ${emoji.gift} <b>...</b>: ...`;
-  bot.sendMessage(id, html, { parse_mode: 'HTML' }).catch((err) => {
-    console.log(err.code);
-    console.log(err.response.body);
-  });
-};
-
-module.exports = {
-  Start,
-  Help,
-  Donate
-};
+module.exports = { Start, Help };
