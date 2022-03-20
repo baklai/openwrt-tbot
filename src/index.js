@@ -1,7 +1,7 @@
 /*
- * Telegram Bot
+ * OpenWrt Telegram Bot
  * Copyright(c) 2020 Dmitrii Baklai
- * ISC Licensed
+ * MIT Licensed
  */
 
 /*
@@ -50,9 +50,9 @@ TBOT.setMyCommands([...cmd.main.commands, ...cmd.method.commands], {})
     console.log(err.response);
   });
 
-TBOT.onText(/\/start/, function (msg) {
-  msg.from.id == TELEGRAM_ID ? Start(TBOT, msg) : htmlStatusBot403(TBOT, msg);
-});
+// TBOT.onText(/\/start/, function (msg) {
+//   msg.from.id == TELEGRAM_ID ? Start(TBOT, msg) : htmlStatusBot403(TBOT, msg);
+// });
 
 TBOT.onText(/\/help/, function (msg) {
   msg.from.id == TELEGRAM_ID ? Help(TBOT, msg) : htmlStatusBot403(TBOT, msg);
