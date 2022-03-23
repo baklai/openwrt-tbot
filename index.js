@@ -44,3 +44,21 @@ TBOT.onText(/\/status/, function (msg) {
     htmlStatusBot403(TBOT, msg);
   }
 });
+
+TBOT.onText(/\/network/, function (msg) {
+  if (msg.from.id == TELEGRAM_ID) {
+    const html = `
+    <b>Привет <i>${msg.from.first_name}</i></b>!\n
+  
+    `;
+    TBOT.sendMessage(msg.chat.id, html, {
+      parse_mode: 'HTML',
+      disable_web_page_preview: true
+    }).catch((err) => {
+      console.log(err.code);
+      console.log(err.response.body);
+    });
+  } else {
+    htmlStatusBot403(TBOT, msg);
+  }
+});

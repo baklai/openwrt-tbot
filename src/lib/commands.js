@@ -13,6 +13,9 @@ module.exports = {
   },
   method: {
     description: 'Функциональные комманды',
-    commands: [{ command: 'status', description: 'статус устройства' }]
+    commands: [
+      { command: 'status', description: 'статус устройства' },
+      { command: 'network', description: 'конфигурации сети' }
+    ]
   }
 };
