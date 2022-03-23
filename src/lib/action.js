@@ -6,11 +6,12 @@ const Start = (bot, msg) => {
   const { id } = msg.chat;
   const html = `
   <b>Привет <i>${msg.from.first_name}</i></b>!
-  <i>Я могу помочь тебе в поиске заказов по программированию. 
-  Я агрегирую информацию из социальной сети <b>Вконтакте</b>.</i>\n
+  <i>Я могу помочь тебе в использовании <b>OpenWrt</b>.</i>\n
   <b>Список быстрых ссылок:</b>
-  <b>&#187;</b> /help - справка по коммандам\n
-  <b>&#187;</b> <a href="https://github.com/baklai">Мой GitHub</a>
+  <b>&#187;</b> /help - справка по коммандам
+  <b>&#187;</b> /status - статус устройства\n
+  <b>Мой GitHub профиль:</b>
+  https://github.com/baklai
   `;
   bot
     .sendMessage(id, html, {
@@ -25,9 +26,7 @@ const Start = (bot, msg) => {
 
 const Help = (bot, msg) => {
   const { id } = msg.chat;
-  const html = `<b>Привет <i>${msg.from.first_name}</i></b>!
-  <i>Я могу помочь тебе в ... 
-  </b>.</i>\n`;
+  const html = `<b>Привет <i>${msg.from.first_name}</i></b>!`;
   let command = `\nТы можешь управлять мной, <b>отправляя эти команды</b>:\n`;
   command += `\n<b>${cmd.main.description}:</b>`;
   cmd.main.commands.forEach(function (item) {

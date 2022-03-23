@@ -8,8 +8,7 @@ module.exports = {
     description: 'Основные комманды',
     commands: [
       { command: 'start', description: 'запуск бота' },
-      { command: 'help', description: 'справка по работе с ботом' },
-      { command: 'donate', description: 'пожертвование на обучение бота' }
+      { command: 'help', description: 'справка по работе с ботом' }
     ]
   },
   method: {

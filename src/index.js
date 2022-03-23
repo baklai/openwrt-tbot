@@ -35,7 +35,7 @@ TBOT.on('polling_error', function (err) {
 const cmd = require('./lib/commands');
 
 // Actions list for action
-const { Start, Help, About, Donate } = require('./lib/action.js');
+const { Start, Help } = require('./lib/action.js');
 
 // List of the bot's default message
 const { htmlStatusBot403 } = require('./lib/html-message');
@@ -50,20 +50,12 @@ TBOT.setMyCommands([...cmd.main.commands, ...cmd.method.commands], {})
     console.log(err.response);
   });
 
-// TBOT.onText(/\/start/, function (msg) {
-//   msg.from.id == TELEGRAM_ID ? Start(TBOT, msg) : htmlStatusBot403(TBOT, msg);
-// });
+TBOT.onText(/\/start/, function (msg) {
+  msg.from.id == TELEGRAM_ID ? Start(TBOT, msg) : htmlStatusBot403(TBOT, msg);
+});
 
 TBOT.onText(/\/help/, function (msg) {
   msg.from.id == TELEGRAM_ID ? Help(TBOT, msg) : htmlStatusBot403(TBOT, msg);
-});
-
-TBOT.onText(/\/about/, function (msg) {
-  msg.from.id == TELEGRAM_ID ? About(TBOT, msg) : htmlStatusBot403(TBOT, msg);
-});
-
-TBOT.onText(/\/donate/, function (msg) {
-  msg.from.id == TELEGRAM_ID ? Donate(TBOT, msg) : htmlStatusBot403(TBOT, msg);
 });
 
 module.exports = { TBOT };

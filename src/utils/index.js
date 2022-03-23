@@ -14,7 +14,12 @@ lowerFirstLetter = (str) => {
   }
 };
 
+dateToString = (value) => {
+  return new Date(value).toLocaleString();
+};
+
 module.exports = {
   truncateMsg,
-  lowerFirstLetter
+  lowerFirstLetter,
+  dateToString
 };
