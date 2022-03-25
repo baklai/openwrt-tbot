@@ -4,44 +4,16 @@
  * MIT Licensed
  */
 
-/*
- *  Permanent fix :
- *  https://github.com/yagop/node-telegram-bot-api/issues/319
- */
-process.env.NTBA_FIX_319 = 1;
-
-// Application config
-const { TELEGRAM_ID, TELEGRAM_TOKEN } = process.env;
-
-// Telegram Modules
-const TelegramBot = require('node-telegram-bot-api');
-
-// Create a bot that uses 'polling' to fetch new updates
-const TBOT = new TelegramBot(TELEGRAM_TOKEN, {
-  filepath: false,
-  polling: {
-    interval: 300,
-    autoStart: true,
-    params: { timeout: 10 }
-  }
-});
-
-// Polling error
-TBOT.on('polling_error', function (err) {
-  console.log(err.code);
-});
+const { bot } = require('./lib/telegram-bot');
 
 // List of the bot's commands
-const cmd = require('./lib/commands');
+const { main, method } = require('./lib/commands');
 
-// Actions list for action
-const { Start, Help } = require('./lib/action.js');
-
-// List of the bot's default message
-const { htmlStatusBot403 } = require('./lib/html-message');
+const { TELEGRAM_ID } = process.env;
 
 // Create the list of the bot's commands
-TBOT.setMyCommands([...cmd.main.commands, ...cmd.method.commands], {})
+bot
+  .setMyCommands([...main.commands, ...method.commands], {})
   .then(function (msg) {
     console.log('Telegram Bot is running...');
   })
@@ -50,12 +22,67 @@ TBOT.setMyCommands([...cmd.main.commands, ...cmd.method.commands], {})
     console.log(err.response);
   });
 
-TBOT.onText(/\/start/, function (msg) {
-  msg.from.id == TELEGRAM_ID ? Start(TBOT, msg) : htmlStatusBot403(TBOT, msg);
+const INIT_BOT = new Date().valueOf();
+
+bot.on('message', (msg) => {
+  console.log(msg);
+  bot.sendMessage(msg.chat.id, 'Privet');
 });
 
-TBOT.onText(/\/help/, function (msg) {
-  msg.from.id == TELEGRAM_ID ? Help(TBOT, msg) : htmlStatusBot403(TBOT, msg);
+// Actions list for action
+const { Start, Help } = require('./lib/action.js');
+
+// List of the bot's default message
+const { htmlStatusBot403 } = require('./lib/html-message');
+
+const { dateToString } = require('./utils');
+
+bot.onText(/\/start/, function (msg) {
+  msg.from.id == TELEGRAM_ID ? Start(bot, msg) : htmlStatusBot403(bot, msg);
 });
 
-module.exports = { TBOT };
+bot.onText(/\/help/, function (msg) {
+  msg.from.id == TELEGRAM_ID ? Help(bot, msg) : htmlStatusBot403(bot, msg);
+});
+
+bot.onText(/\/status/, function (msg) {
+  if (msg.from.id == TELEGRAM_ID) {
+    const html = `
+    <b>Привет <i>${msg.from.first_name}</i></b>!\n
+    <b>Статус утсройства:</b>
+    Доступность устройства: устройство в сети!
+    Бот проинициализирован: ${dateToString(INIT_BOT)}
+    `;
+    bot
+      .sendMessage(msg.chat.id, html, {
+        parse_mode: 'HTML',
+        disable_web_page_preview: true
+      })
+      .catch((err) => {
+        console.log(err.code);
+        console.log(err.response.body);
+      });
+  } else {
+    htmlStatusBot403(bot, msg);
+  }
+});
+
+bot.onText(/\/network/, function (msg) {
+  if (msg.from.id == TELEGRAM_ID) {
+    const html = `
+    <b>Привет <i>${msg.from.first_name}</i></b>!\n
+  
+    `;
+    bot
+      .sendMessage(msg.chat.id, html, {
+        parse_mode: 'HTML',
+        disable_web_page_preview: true
+      })
+      .catch((err) => {
+        console.log(err.code);
+        console.log(err.response.body);
+      });
+  } else {
+    htmlStatusBot403(bot, msg);
+  }
+});

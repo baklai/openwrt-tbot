@@ -13,6 +13,7 @@ npm install
 ```
 TELEGRAM_ID : ID администратора в telegram
 TELEGRAM_TOKEN : Токен бота в telegram
+PROXY : Прокси-сервер http://user:password@host:port/
 ```
 
 ### Production

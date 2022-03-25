@@ -26,5 +26,8 @@
     "dotenv": "^16.0.0",
     "node-emoji": "^1.11.0",
     "node-telegram-bot-api": "^0.56.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

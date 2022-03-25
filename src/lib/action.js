@@ -1,3 +1,7 @@
+/**
+ * List of the bot actions
+ */
+
 const emoji = require('node-emoji').emoji;
 
 const cmd = require('./commands');

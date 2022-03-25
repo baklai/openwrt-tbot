@@ -12,6 +12,4 @@ const htmlStatusBot403 = (bot, msg) => {
   });
 };
 
-module.exports = {
-  htmlStatusBot403
-};
+module.exports = { htmlStatusBot403 };
