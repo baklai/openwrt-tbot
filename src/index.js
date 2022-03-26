@@ -3,46 +3,78 @@
  * Copyright(c) 2020 Dmitrii Baklai
  * MIT Licensed
  */
-
 const { bot } = require('./lib/telegram-bot');
 
-// List of the bot's commands
-const { main, method } = require('./lib/commands');
+const emoji = require('node-emoji').emoji;
 
 const { TELEGRAM_ID } = process.env;
 
-// Create the list of the bot's commands
-bot
-  .setMyCommands([...main.commands, ...method.commands], {})
-  .then(function (msg) {
-    console.log('Telegram Bot is running...');
-  })
-  .catch((err) => {
-    console.log(err.code);
-    console.log(err.response);
-  });
-
 const INIT_BOT = new Date().valueOf();
 
-bot.on('message', (msg) => {
-  console.log(msg);
-  bot.sendMessage(msg.chat.id, 'Privet');
-});
-
-// Actions list for action
-const { Start, Help } = require('./lib/action.js');
-
 // List of the bot's default message
-const { htmlStatusBot403 } = require('./lib/html-message');
+const status403 = (msg) => {
+  return `Привет, <b>${msg.from.first_name}</b>.
+  Спасибо что зашел, но это <b>приватный</b> чат бот!
+  Если тебе <b>нужен бот</b> пиши мне <b>@baklai</b>\n\n
+  Мой GitHub профиль:
+  https://github.com/baklai
+  `;
+};
 
 const { dateToString } = require('./utils');
 
 bot.onText(/\/start/, function (msg) {
-  msg.from.id == TELEGRAM_ID ? Start(bot, msg) : htmlStatusBot403(bot, msg);
+  if (msg.from.id == TELEGRAM_ID) {
+    const { id } = msg.chat;
+    const html = `
+  <b>Привет <i>${msg.from.first_name}</i></b>!
+  <i>Я могу помочь тебе в использовании <b>OpenWrt</b>.</i>\n
+  <b>Список быстрых ссылок:</b>
+  <b>&#187;</b> /help - справка по коммандам
+  <b>&#187;</b> /status - статус устройства\n
+  <b>Мой GitHub профиль:</b>
+  https://github.com/baklai
+  `;
+    bot
+      .sendMessage(id, html, {
+        parse_mode: 'HTML',
+        disable_web_page_preview: true
+      })
+      .catch((err) => {
+        console.log(err.code);
+        console.log(err.response.body);
+      });
+  } else {
+    bot.sendMessage(id, status403(msg), { parse_mode: 'HTML' }).catch((err) => {
+      console.log(err.code);
+      console.log(err.response.body);
+    });
+  }
 });
 
 bot.onText(/\/help/, function (msg) {
-  msg.from.id == TELEGRAM_ID ? Help(bot, msg) : htmlStatusBot403(bot, msg);
+  if (msg.from.id == TELEGRAM_ID) {
+    const { id } = msg.chat;
+    const html = `<b>Привет <i>${msg.from.first_name}</i></b>!`;
+    let command = `\nТы можешь управлять мной, <b>отправляя эти команды</b>:\n`;
+    command += `\n<b>${cmd.main.description}:</b>`;
+    cmd.main.commands.forEach(function (item) {
+      command += `\n/${item.command} - ${item.description}`;
+    });
+    command += `\n\n<b>${cmd.method.description}:</b>`;
+    cmd.method.commands.forEach(function (item) {
+      command += `\n/${item.command} - ${item.description}`;
+    });
+    bot.sendMessage(id, html + command, { parse_mode: 'HTML' }).catch((err) => {
+      console.log(err.code);
+      console.log(err.response.body);
+    });
+  } else {
+    bot.sendMessage(id, status403(msg), { parse_mode: 'HTML' }).catch((err) => {
+      console.log(err.code);
+      console.log(err.response.body);
+    });
+  }
 });
 
 bot.onText(/\/status/, function (msg) {
@@ -63,7 +95,10 @@ bot.onText(/\/status/, function (msg) {
         console.log(err.response.body);
       });
   } else {
-    htmlStatusBot403(bot, msg);
+    bot.sendMessage(id, status403(msg), { parse_mode: 'HTML' }).catch((err) => {
+      console.log(err.code);
+      console.log(err.response.body);
+    });
   }
 });
 
@@ -83,6 +118,9 @@ bot.onText(/\/network/, function (msg) {
         console.log(err.response.body);
       });
   } else {
-    htmlStatusBot403(bot, msg);
+    bot.sendMessage(id, status403(msg), { parse_mode: 'HTML' }).catch((err) => {
+      console.log(err.code);
+      console.log(err.response.body);
+    });
   }
 });

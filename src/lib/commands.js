@@ -5,8 +5,9 @@
 const main = {
   description: 'Основные комманды',
   commands: [
-    { command: 'start', description: 'запуск бота' },
-    { command: 'help', description: 'справка по работе с ботом' }
+    { command: 'start', description: 'старт' },
+    { command: 'about', description: 'о боте' },
+    { command: 'help', description: 'справка' }
   ]
 };
 
