@@ -1,5 +1,5 @@
 /**
- * List of the bot commands
+ * Lists of the bot commands
  */
 
 const main = {
